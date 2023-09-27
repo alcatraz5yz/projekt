@@ -1,14 +1,9 @@
-#ifndef SNAKEWINDOW_H
-#define SNAKEWINDOW_H
-
+#pragma once
 #include <QWidget>
 
-namespace Ui {
-class SnakeWindow;
-}
+namespace Ui { class SnakeWindow; }
 
-class SnakeWindow : public QWidget
-{
+class SnakeWindow : public QWidget {
     Q_OBJECT
 
 public:
@@ -18,7 +13,3 @@ public:
 private:
     Ui::SnakeWindow *ui;
 };
-
-
-
-#endif // SNAKEWINDOW_H

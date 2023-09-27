@@ -1,6 +1,4 @@
-#ifndef SNAKE_H
-#define SNAKE_H
-
+#pragma once
 #include <vector>
 #include <cstddef>
 
@@ -11,34 +9,24 @@ namespace snakeGame {
         std::size_t y;
     };
 
-    struct SnakeSegment
-    {
+    struct SnakeSegment {
         Point pos{ 0 , 0 };
         Point prev{ pos };
     };
 
-    class Snake
-    {
+    class Snake {
     public:
         Snake(std::size_t boardWidth, std::size_t boardHeight);
-
         std::vector<SnakeSegment> getBody() const;
-
         void moveRight();
         void moveDown();
         void moveLeft();
         void moveUp();
         void grow();
-
     private:
         void safeCurrentPosToLastOfFirstElement();
         void moveRemainingElements();
-
         std::vector<SnakeSegment> mBody;
     };
-
-    std::vector<SnakeSegment> initSnake(
-        std::size_t fieldWidth, std::size_t fieldHeight);
-
+    std::vector<SnakeSegment> initSnake( std::size_t fieldWidth, std::size_t fieldHeight);
 }
-#endif

@@ -1,92 +1,66 @@
 #include "SnakeBoard.h"
-
 #include <QKeyEvent>
 #include <QColor>
 #include <QPainter>
 #include <QRgb>
 #include <QTimerEvent>
-
 #include <QDebug>
-
 using namespace snakeGame;
 
-SnakeBoard::SnakeBoard(QWidget* parent)
-    : QFrame{parent},
+SnakeBoard::SnakeBoard(QWidget* parent) : QFrame{parent},
     board{boardWidth, boardHeight},
-    snakeDirection{SnakeDirection::right}
-{
+    snakeDirection{SnakeDirection::right} {
     setFrameStyle(QFrame::Panel | QFrame::Sunken);
     setFocusPolicy(Qt::StrongFocus);
-
     board.updateSnakePosition();
     board.placeFood();
 }
 
-QSize SnakeBoard::sizeHint() const
-{
-    return QSize(boardWidth * 15 + frameWidth() * 2,
-                 boardHeight * 15 + frameWidth() * 2);
+QSize SnakeBoard::sizeHint() const {
+    return QSize(boardWidth * 15 + frameWidth() * 2, boardHeight * 15 + frameWidth() * 2);
 }
 
-QSize SnakeBoard::minimumSizeHint() const
-{
-    return QSize(boardWidth * 5 + frameWidth() * 2,
-                 boardHeight * 5 + frameWidth() * 2);
+QSize SnakeBoard::minimumSizeHint() const {
+    return QSize(boardWidth * 5 + frameWidth() * 2, boardHeight * 5 + frameWidth() * 2);
 }
 
-void SnakeBoard::start()
-{
+void SnakeBoard::start() {
     if (isGameOver) {
         isGameOver = false;
         board.reset();
         board.updateSnakePosition();
         board.placeFood();
-
         score = 0;
         points = initPoints;
         delay = initDelay;
     }
-
-    if (isPaused)
-        return;
+    if (isPaused) return;
 
     isStarted = true;
-
     emit scoreChanged(score);
     emit delayChanged(delay);
-
     timer.start(delay, this);
 }
 
-void SnakeBoard::pause()
-{
-    if (!isStarted)
-        return;
+void SnakeBoard::pause() {
+    if (!isStarted) return;
 
     isPaused = !isPaused;
-    if (isPaused) {
-        timer.stop();
-    }
-    else {
-        timer.start(delay, this);
-    }
+    if (isPaused) timer.stop();
+    else timer.start(delay, this);
     update();
 }
 
-void SnakeBoard::gameOver()
-{
+void SnakeBoard::gameOver() {
     timer.stop();
     isGameOver = true;
     isStarted = false;
 }
 
-void SnakeBoard::paintEvent(QPaintEvent *event)
-{
+void SnakeBoard::paintEvent(QPaintEvent *event) {
     QFrame::paintEvent(event);
-
     QPainter painter(this);
     QRect rect = contentsRect();
-
 
     if(isGameOver) {
         QFont font;
@@ -118,26 +92,18 @@ void SnakeBoard::paintEvent(QPaintEvent *event)
     for (int i = 0; i < boardHeight; ++i) {
         for (int j = 0; j < boardWidth; ++j) {
             auto fieldType =
-                board.fieldTypeAt(
-                    static_cast<std::size_t>(j),
-                    static_cast<std::size_t>(i));
-            drawField(painter, rect.left() + j * squareWidth(),
-                      boardTop + i * squareHeight(), fieldType);
+            board.fieldTypeAt( static_cast<std::size_t>(j), static_cast<std::size_t>(i));
+            drawField(painter, rect.left() + j * squareWidth(), boardTop + i * squareHeight(), fieldType);
         }
     }
 }
 
 
-void SnakeBoard::keyPressEvent(QKeyEvent *event)
-{
+void SnakeBoard::keyPressEvent(QKeyEvent *event) {
     auto key = event->key();
 
-    if (key == Qt::Key_P) {
-        emit pause();
-    }
-    if (key == Qt::Key_Space) {
-        emit start();
-    }
+    if (key == Qt::Key_P) { emit pause(); }
+    if (key == Qt::Key_Space) { emit start(); }
     else if (!isStarted || isGameOver || !snakeWasMoved) {
         QFrame::keyPressEvent(event);
         return;
@@ -173,18 +139,15 @@ void SnakeBoard::keyPressEvent(QKeyEvent *event)
     }
 }
 
-void SnakeBoard::timerEvent(QTimerEvent *event)
-{
+void SnakeBoard::timerEvent(QTimerEvent *event) {
     if (isGameOver){
         QFrame::timerEvent(event);
         return;
     }
 
     if (event->timerId() == timer.timerId()) {
-
         board.moveSnake(snakeDirection);
         snakeWasMoved = true;
-
         if (board.snakeHitFood()) {
             board.eatFood();
             board.growSnake();
@@ -193,39 +156,27 @@ void SnakeBoard::timerEvent(QTimerEvent *event)
             score += points;
             points += static_cast<double>(initDelay / delay) * initPoints;
             delay -= 4;
-
             emit scoreChanged(score);
             emit delayChanged(delay);
         }
-        else if (board.snakeHitWall() || board.snakeHitSnake()) {
-            emit gameOver();
-        }
-        else {
-            board.updateSnakePosition();
-        }
 
+        else if (board.snakeHitWall() || board.snakeHitSnake()) { emit gameOver(); }
+        else  board.updateSnakePosition();
         update();
-
         timer.start(delay, this);
     }
-    else {
-        QFrame::timerEvent(event);
-    }
+    else { QFrame::timerEvent(event); }
 }
 
-int SnakeBoard::squareWidth()
-{
+int SnakeBoard::squareWidth() {
     return contentsRect().width() / boardWidth;
 }
 
-int SnakeBoard::squareHeight()
-{
+int SnakeBoard::squareHeight() {
     return contentsRect().height() / boardHeight;
 }
 
-void SnakeBoard::drawField(
-    QPainter& painter, int x, int y, snakeGame::FieldType fieldType)
-{
+void SnakeBoard::drawField( QPainter& painter, int x, int y, snakeGame::FieldType fieldType) {
     switch(fieldType){
     case FieldType::empty:
         break;
@@ -246,30 +197,17 @@ void SnakeBoard::drawField(
 
 void SnakeBoard::drawWall(QPainter& painter, int x, int y) {
     constexpr auto colorBrown = 0xbf8040;
-
     QColor color = QRgb{colorBrown};
-    painter.fillRect(x + 1, y + 1, squareWidth() - 2, squareHeight() - 2,
-                     color);
-
+    painter.fillRect(x + 1, y + 1, squareWidth() - 2, squareHeight() - 2, color);
     painter.setPen(color.lighter());
     painter.drawLine(x, y + squareHeight() - 1, x, y);
     painter.drawLine(x, y, x + squareWidth() - 1, y);
-
     painter.setPen(color.darker());
-    painter.drawLine(x + 1, y + squareHeight() - 1,
-                     x + squareWidth() - 1, y + squareHeight() - 1);
-    painter.drawLine(x + squareWidth() - 1, y + squareHeight() - 1,
-                     x + squareWidth() - 1, y + 1);
+    painter.drawLine(x + 1, y + squareHeight() - 1, x + squareWidth() - 1, y + squareHeight() - 1);
+    painter.drawLine(x + squareWidth() - 1, y + squareHeight() - 1, x + squareWidth() - 1, y + 1);
 }
 
-
-
-
-
-
-
-void SnakeBoard::drawFood(QPainter& painter, int x, int y)
-{
+void SnakeBoard::drawFood(QPainter& painter, int x, int y) {
     constexpr auto colorRed = 0xff0000;
     QColor color = QRgb{colorRed};
     painter.setPen(color.lighter());
@@ -277,40 +215,26 @@ void SnakeBoard::drawFood(QPainter& painter, int x, int y)
     painter.drawEllipse(x +1,y +1,squareWidth() -3, squareHeight() -3);
 }
 
-void SnakeBoard::drawSnakeHead(QPainter& painter, int x, int y)
-{
+void SnakeBoard::drawSnakeHead(QPainter& painter, int x, int y) {
     constexpr auto colorDarkerLimeGreen = 0x00b300;
-
     QColor color = QRgb{colorDarkerLimeGreen};
-    painter.fillRect(x + 1, y + 1, squareWidth() - 2, squareHeight() - 2,
-                     color);
-
+    painter.fillRect(x + 1, y + 1, squareWidth() - 2, squareHeight() - 2, color);
     painter.setPen(color.lighter());
     painter.drawLine(x, y + squareHeight() - 1, x, y);
     painter.drawLine(x, y, x + squareWidth() - 1, y);
-
     painter.setPen(color.darker());
-    painter.drawLine(x + 1, y + squareHeight() - 1,
-                     x + squareWidth() - 1, y + squareHeight() - 1);
-    painter.drawLine(x + squareWidth() - 1, y + squareHeight() - 1,
-                     x + squareWidth() - 1, y + 1);
+    painter.drawLine(x + 1, y + squareHeight() - 1, x + squareWidth() - 1, y + squareHeight() - 1);
+    painter.drawLine(x + squareWidth() - 1, y + squareHeight() - 1, x + squareWidth() - 1, y + 1);
 }
 
-void SnakeBoard::drawSnakeSegment(QPainter& painter, int x, int y)
-{
+void SnakeBoard::drawSnakeSegment(QPainter& painter, int x, int y) {
     constexpr auto colorLimeGreen = 0x00e600;
-
     QColor color = QRgb{colorLimeGreen};
-    painter.fillRect(x + 1, y + 1, squareWidth() - 2, squareHeight() - 2,
-                     color);
-
+    painter.fillRect(x + 1, y + 1, squareWidth() - 2, squareHeight() - 2, color);
     painter.setPen(color.lighter());
     painter.drawLine(x, y + squareHeight() - 1, x, y);
     painter.drawLine(x, y, x + squareWidth() - 1, y);
-
     painter.setPen(color.darker());
-    painter.drawLine(x + 1, y + squareHeight() - 1,
-                     x + squareWidth() - 1, y + squareHeight() - 1);
-    painter.drawLine(x + squareWidth() - 1, y + squareHeight() - 1,
-                     x + squareWidth() - 1, y + 1);
+    painter.drawLine(x + 1, y + squareHeight() - 1, x + squareWidth() - 1, y + squareHeight() - 1);
+    painter.drawLine(x + squareWidth() - 1, y + squareHeight() - 1, x + squareWidth() - 1, y + 1);
 }

@@ -1,30 +1,26 @@
 #include "Board.h"
-
 #include <algorithm>
 #include <iostream>
 
 namespace snakeGame {
 
-    Board::Board(std::size_t width, std::size_t height)
-        : mWidth{width},
+    Board::Board(std::size_t width, std::size_t height) : 
+
+        mWidth{width},
         mHeight{height},
         mSnake{ width, height },
         mFields{ initFieldWithWalls(width, height) },
         mRandomDevice{},
         mGenerator{ mRandomDevice() },
         mWidthDistribution{ 2, width - 3 },
-        mHeightDistribution{ 2, height - 3 }
-    {
-    }
+        mHeightDistribution{ 2, height - 3 } { }
 
-    void Board::reset()
-    {
+    void Board::reset() {
         mFields = initFieldWithWalls(mWidth, mHeight);
         mSnake = Snake{mWidth,mHeight};
     }
 
-    void Board::placeFood()
-    {
+    void Board::placeFood() {
         for (;;) {
             auto x = mWidthDistribution(mGenerator);
             auto y = mHeightDistribution(mGenerator);
@@ -36,45 +32,37 @@ namespace snakeGame {
         }
     }
 
-    void Board::updateSnakePosition()
-    {
+    void Board::updateSnakePosition() {
         auto snakeBody = mSnake.getBody();
-
         removeOldSnakePosition(snakeBody);
         addNewSnakePosition(snakeBody);
     }
 
-    bool Board::snakeHitFood() const
-    {
+    bool Board::snakeHitFood() const {
         auto pos = mSnake.getBody().at(0).pos;
         return mFields.at(pos.y).at(pos.x) == FieldType::food;
     }
 
-    void Board::eatFood()
-    {
+    void Board::eatFood() {
         auto pos = mSnake.getBody()[0].pos;
         mFields.at(pos.y).at(pos.x) = FieldType::empty;
     }
 
-    void Board::growSnake()
-    {
+    void Board::growSnake() {
         mSnake.grow();
     }
 
-    bool Board::snakeHitWall() const
-    {
+    bool Board::snakeHitWall() const {
         auto pos = mSnake.getBody()[0].pos;
         return mFields.at(pos.y).at(pos.x) == FieldType::wall;
     }
 
-    bool Board::snakeHitSnake() const
-    {
+    bool Board::snakeHitSnake() const {
         auto pos = mSnake.getBody()[0].pos;
         return mFields.at(pos.y).at(pos.x) == FieldType::snakeSegment;
     }
 
-    void Board::moveSnake(SnakeDirection snakeDirection)
-    {
+    void Board::moveSnake(SnakeDirection snakeDirection) {
         switch (snakeDirection) {
         case SnakeDirection::right:
             mSnake.moveRight();
@@ -94,20 +82,13 @@ namespace snakeGame {
         }
     }
 
-    void Board::debugPrintSnakeCoordinates()
-    {
+    void Board::debugPrintSnakeCoordinates() {
         auto body = mSnake.getBody();
-
         for (std::size_t i = 0; i < body.size(); ++i) {
             auto pos = body.at(i).pos;
-
-            std::wcout << "nr:" << i << "x:" << pos.x
-                       << "\t" << "y:" << pos.y << "\t";
-
+            std::wcout << "nr:" << i << "x:" << pos.x << "\t" << "y:" << pos.y << "\t";
             auto field = mFields.at(pos.y).at(pos.x);
-
-            switch(field)
-            {
+            switch(field) {
             case FieldType::snakeHead:
                 std::wcout << L"Head\t";
                 [[fallthrough]];
@@ -120,39 +101,31 @@ namespace snakeGame {
         }
     }
 
-    FieldType Board::fieldTypeAt(std::size_t x, std::size_t y)
-    {
+    FieldType Board::fieldTypeAt(std::size_t x, std::size_t y) {
         return mFields.at(y).at(x);
     }
 
     std::vector<std::vector<FieldType>> Board::initFieldWithWalls(
-        std::size_t width, std::size_t height)
-    {
+        std::size_t width, std::size_t height) {
         std::vector<FieldType> row(width, FieldType::empty);
         std::vector<std::vector<FieldType>> field(height, row);
-
         std::fill(field.at(0).begin(), field.at(0).end(), FieldType::wall);
-        std::fill(field.at(field.size() - 1).begin(),
-                  field.at(field.size() - 1).end(), FieldType::wall);
-
-        for (auto it_row = field.begin() + 1;
-             it_row < field.end() - 1; ++it_row) {
+        std::fill(field.at(field.size() - 1).begin(), field.at(field.size() - 1).end(), FieldType::wall);
+        for (auto it_row = field.begin() + 1; it_row < field.end() - 1; ++it_row) {
             (*it_row).at(0) = FieldType::wall;
             (*it_row).at(it_row->size() - 1) = FieldType::wall;
         }
         return field;
     }
 
-    void Board::removeOldSnakePosition(const std::vector<SnakeSegment>& body)
-    {
+    void Board::removeOldSnakePosition(const std::vector<SnakeSegment>& body) {
         for (const auto& snakeSegment : body) {
             auto prev = snakeSegment.prev;
             mFields.at(prev.y).at(prev.x) = FieldType::empty;
         }
     }
 
-    void Board::addNewSnakePosition(const std::vector<SnakeSegment>& body)
-    {
+    void Board::addNewSnakePosition(const std::vector<SnakeSegment>& body) {
         auto first{ true };
         for (const auto& snakeSegment : body) {
             auto pos = snakeSegment.pos;
@@ -167,12 +140,9 @@ namespace snakeGame {
         }
     }
 
-
-    std::wostream& operator<<(std::wostream& os, const Board& obj)
-    {
+    std::wostream& operator<<(std::wostream& os, const Board& obj) {
         for (const auto& row : obj.mFields) {
             for (const auto& element : row) {
-
                 switch(element){
                 case FieldType::empty:
                     os << L' ';
@@ -195,5 +165,4 @@ namespace snakeGame {
         }
         return os;
     }
-
 }

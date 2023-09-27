@@ -1,6 +1,4 @@
-#ifndef SNAKEBOARD_H
-#define SNAKEBOARD_H
-
+#pragma once
 #include <QFrame>
 #include <QBasicTimer>
 
@@ -60,5 +58,3 @@ private:
     int delay{initDelay};
     int points{initPoints};
 };
-
-#endif // SNAKEBOARD_H
