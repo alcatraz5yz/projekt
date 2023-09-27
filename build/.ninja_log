@@ -1,0 +1,16 @@
+# ninja log v5
+13	452	1695819256588230230	CMakeFiles/HelloWorldQT.dir/Snake.cpp.o	8d63888a9b801eb8
+12	626	1695819256761535229	CMakeFiles/HelloWorldQT.dir/Board.cpp.o	166e7258b3776ef3
+11	837	1695819256972455688	CMakeFiles/HelloWorldQT.dir/main.cpp.o	d18f175d72573862
+12	923	1695819257059389788	CMakeFiles/HelloWorldQT.dir/SnakeBoard.cpp.o	34ae5a1714bbb080
+14	465	1695819298324382600	HelloWorldQT_autogen/timestamp	5734f678a30fe50
+14	465	1695819298324382600	HelloWorldQT_autogen/mocs_compilation.cpp	5734f678a30fe50
+14	465	1695819298324382600	/Users/allan/Desktop/projekt/build/HelloWorldQT_autogen/timestamp	5734f678a30fe50
+14	465	1695819298324382600	/Users/allan/Desktop/projekt/build/HelloWorldQT_autogen/mocs_compilation.cpp	5734f678a30fe50
+467	794	1695819298658457974	CMakeFiles/HelloWorldQT.dir/Snake.cpp.o	1fd050e92e5f40e5
+466	1092	1695819298954375731	CMakeFiles/HelloWorldQT.dir/Board.cpp.o	f27d5dc22e83bfbe
+465	1428	1695819299278318857	CMakeFiles/HelloWorldQT.dir/main.cpp.o	ee2cb82bf0afb192
+465	1460	1695819299319122680	CMakeFiles/HelloWorldQT.dir/HelloWorldQT_autogen/mocs_compilation.cpp.o	aaaac1283b07fa2f
+466	1520	1695819299383238700	CMakeFiles/HelloWorldQT.dir/SnakeWindow.cpp.o	be45424667818b4e
+466	1533	1695819299395668535	CMakeFiles/HelloWorldQT.dir/SnakeBoard.cpp.o	2e9dcd2e969c829d
+1533	1705	1695819299569879562	HelloWorldQT	d2132c30782b6b15

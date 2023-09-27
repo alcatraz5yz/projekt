@@ -43,9 +43,7 @@ class Ui_SnakeWindow(object):
         self.delayLcd.setDigitCount(5)
         self.delayLcd.setMode(QLCDNumber.Dec)
         self.delayLcd.setSegmentStyle(QLCDNumber.Flat)
-
         self.gridLayout.addWidget(self.delayLcd, 1, 2, 1, 2)
-
         self.snakeBoard = SnakeBoard(SnakeWindow)
         self.snakeBoard.setObjectName(u"snakeBoard")
         sizePolicy1 = QSizePolicy(QSizePolicy.Preferred, QSizePolicy.Preferred)

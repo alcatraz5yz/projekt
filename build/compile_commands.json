@@ -1,0 +1,38 @@
+[
+{
+  "directory": "/Users/allan/Desktop/projekt/build",
+  "command": "/usr/bin/clang++ -DQT_CORE_LIB -DQT_GUI_LIB -DQT_WIDGETS_LIB -I/Users/allan/Desktop/projekt/build -I/Users/allan/Desktop/projekt -I/Users/allan/Desktop/projekt/build/HelloWorldQT_autogen/include -isystem /opt/homebrew/lib/QtWidgets.framework/Headers -iframework /opt/homebrew/lib -isystem /opt/homebrew/lib/QtCore.framework/Headers -isystem /opt/homebrew/share/qt/mkspecs/macx-clang -isystem /opt/homebrew/include -isystem /opt/homebrew/lib/QtGui.framework/Headers -g -std=gnu++17 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk -o CMakeFiles/HelloWorldQT.dir/HelloWorldQT_autogen/mocs_compilation.cpp.o -c /Users/allan/Desktop/projekt/build/HelloWorldQT_autogen/mocs_compilation.cpp",
+  "file": "/Users/allan/Desktop/projekt/build/HelloWorldQT_autogen/mocs_compilation.cpp",
+  "output": "CMakeFiles/HelloWorldQT.dir/HelloWorldQT_autogen/mocs_compilation.cpp.o"
+},
+{
+  "directory": "/Users/allan/Desktop/projekt/build",
+  "command": "/usr/bin/clang++ -DQT_CORE_LIB -DQT_GUI_LIB -DQT_WIDGETS_LIB -I/Users/allan/Desktop/projekt/build -I/Users/allan/Desktop/projekt -I/Users/allan/Desktop/projekt/build/HelloWorldQT_autogen/include -isystem /opt/homebrew/lib/QtWidgets.framework/Headers -iframework /opt/homebrew/lib -isystem /opt/homebrew/lib/QtCore.framework/Headers -isystem /opt/homebrew/share/qt/mkspecs/macx-clang -isystem /opt/homebrew/include -isystem /opt/homebrew/lib/QtGui.framework/Headers -g -std=gnu++17 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk -o CMakeFiles/HelloWorldQT.dir/main.cpp.o -c /Users/allan/Desktop/projekt/main.cpp",
+  "file": "/Users/allan/Desktop/projekt/main.cpp",
+  "output": "CMakeFiles/HelloWorldQT.dir/main.cpp.o"
+},
+{
+  "directory": "/Users/allan/Desktop/projekt/build",
+  "command": "/usr/bin/clang++ -DQT_CORE_LIB -DQT_GUI_LIB -DQT_WIDGETS_LIB -I/Users/allan/Desktop/projekt/build -I/Users/allan/Desktop/projekt -I/Users/allan/Desktop/projekt/build/HelloWorldQT_autogen/include -isystem /opt/homebrew/lib/QtWidgets.framework/Headers -iframework /opt/homebrew/lib -isystem /opt/homebrew/lib/QtCore.framework/Headers -isystem /opt/homebrew/share/qt/mkspecs/macx-clang -isystem /opt/homebrew/include -isystem /opt/homebrew/lib/QtGui.framework/Headers -g -std=gnu++17 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk -o CMakeFiles/HelloWorldQT.dir/SnakeWindow.cpp.o -c /Users/allan/Desktop/projekt/SnakeWindow.cpp",
+  "file": "/Users/allan/Desktop/projekt/SnakeWindow.cpp",
+  "output": "CMakeFiles/HelloWorldQT.dir/SnakeWindow.cpp.o"
+},
+{
+  "directory": "/Users/allan/Desktop/projekt/build",
+  "command": "/usr/bin/clang++ -DQT_CORE_LIB -DQT_GUI_LIB -DQT_WIDGETS_LIB -I/Users/allan/Desktop/projekt/build -I/Users/allan/Desktop/projekt -I/Users/allan/Desktop/projekt/build/HelloWorldQT_autogen/include -isystem /opt/homebrew/lib/QtWidgets.framework/Headers -iframework /opt/homebrew/lib -isystem /opt/homebrew/lib/QtCore.framework/Headers -isystem /opt/homebrew/share/qt/mkspecs/macx-clang -isystem /opt/homebrew/include -isystem /opt/homebrew/lib/QtGui.framework/Headers -g -std=gnu++17 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk -o CMakeFiles/HelloWorldQT.dir/SnakeBoard.cpp.o -c /Users/allan/Desktop/projekt/SnakeBoard.cpp",
+  "file": "/Users/allan/Desktop/projekt/SnakeBoard.cpp",
+  "output": "CMakeFiles/HelloWorldQT.dir/SnakeBoard.cpp.o"
+},
+{
+  "directory": "/Users/allan/Desktop/projekt/build",
+  "command": "/usr/bin/clang++ -DQT_CORE_LIB -DQT_GUI_LIB -DQT_WIDGETS_LIB -I/Users/allan/Desktop/projekt/build -I/Users/allan/Desktop/projekt -I/Users/allan/Desktop/projekt/build/HelloWorldQT_autogen/include -isystem /opt/homebrew/lib/QtWidgets.framework/Headers -iframework /opt/homebrew/lib -isystem /opt/homebrew/lib/QtCore.framework/Headers -isystem /opt/homebrew/share/qt/mkspecs/macx-clang -isystem /opt/homebrew/include -isystem /opt/homebrew/lib/QtGui.framework/Headers -g -std=gnu++17 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk -o CMakeFiles/HelloWorldQT.dir/Board.cpp.o -c /Users/allan/Desktop/projekt/Board.cpp",
+  "file": "/Users/allan/Desktop/projekt/Board.cpp",
+  "output": "CMakeFiles/HelloWorldQT.dir/Board.cpp.o"
+},
+{
+  "directory": "/Users/allan/Desktop/projekt/build",
+  "command": "/usr/bin/clang++ -DQT_CORE_LIB -DQT_GUI_LIB -DQT_WIDGETS_LIB -I/Users/allan/Desktop/projekt/build -I/Users/allan/Desktop/projekt -I/Users/allan/Desktop/projekt/build/HelloWorldQT_autogen/include -isystem /opt/homebrew/lib/QtWidgets.framework/Headers -iframework /opt/homebrew/lib -isystem /opt/homebrew/lib/QtCore.framework/Headers -isystem /opt/homebrew/share/qt/mkspecs/macx-clang -isystem /opt/homebrew/include -isystem /opt/homebrew/lib/QtGui.framework/Headers -g -std=gnu++17 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk -o CMakeFiles/HelloWorldQT.dir/Snake.cpp.o -c /Users/allan/Desktop/projekt/Snake.cpp",
+  "file": "/Users/allan/Desktop/projekt/Snake.cpp",
+  "output": "CMakeFiles/HelloWorldQT.dir/Snake.cpp.o"
+}
+]
