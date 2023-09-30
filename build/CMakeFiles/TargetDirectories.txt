@@ -1,7 +1,9 @@
 /Users/allan/Desktop/projekt/build/CMakeFiles/HelloWorldQT.dir
-/Users/allan/Desktop/projekt/build/CMakeFiles/package.dir
-/Users/allan/Desktop/projekt/build/CMakeFiles/package_source.dir
+/Users/allan/Desktop/projekt/build/CMakeFiles/main_test.dir
+/Users/allan/Desktop/projekt/build/CMakeFiles/test.dir
 /Users/allan/Desktop/projekt/build/CMakeFiles/edit_cache.dir
 /Users/allan/Desktop/projekt/build/CMakeFiles/rebuild_cache.dir
 /Users/allan/Desktop/projekt/build/CMakeFiles/HelloWorldQT_autogen_timestamp_deps.dir
 /Users/allan/Desktop/projekt/build/CMakeFiles/HelloWorldQT_autogen.dir
+/Users/allan/Desktop/projekt/build/CMakeFiles/main_test_autogen_timestamp_deps.dir
+/Users/allan/Desktop/projekt/build/CMakeFiles/main_test_autogen.dir

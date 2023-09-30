@@ -1,0 +1,27 @@
+name: C/C++ CI
+
+on:
+  push:
+    branches:
+      - main  # Replace with the default branch of your repository
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Set up CMake
+      uses: actions/setup-cmake@v1
+      with:
+        cmake-version: 3.21  # Choose your desired CMake version
+
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Build and Test
+      run: |
+        mkdir build
+        cd build
+        cmake ..
+        make
+        ctest
