@@ -11,9 +11,10 @@ jobs:
 
     steps:
     - name: Set up CMake
-      uses: actions/setup-cmake@v1
-      with:
-        cmake-version: 3.21  # Choose your desired CMake version
+      run: |
+        wget https://github.com/Kitware/CMake/releases/download/v3.21.3/cmake-3.21.3-Linux-x86_64.sh
+        chmod +x cmake-3.21.3-Linux-x86_64.sh
+        sudo ./cmake-3.21.3-Linux-x86_64.sh --prefix=/usr/local --exclude-subdir
 
     - name: Checkout code
       uses: actions/checkout@v2
